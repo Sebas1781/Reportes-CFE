@@ -1,1 +1,25 @@
-<p>pregunta-imagen works!</p>
+<div class="flex flex-col space-y-4 items-center">
+  <label class="block text-sm font-medium text-gray-700">{{ label }}</label>
+
+  <div class="flex items-center space-x-3">
+    <!-- Imagen previa -->
+    <div class="shrink-0 ml-4">
+      <img [src]="imagenSrc || 'https://via.placeholder.com/64'" id="preview_img"
+         class="h-20 w-20 object-cover rounded-full"
+         alt="Previsualización de la imagen seleccionada" />
+    </div>
+
+    <!-- Input de carga de imagen -->
+    <label class="block">
+      <span class="sr-only">Selecciona archivo</span>
+      <input type="file" (change)="onImagenSeleccionada($event)" accept="image/*"
+             class="block w-full text-sm text-slate-500 custom-file-input
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-violet-50 file:text-green-500
+                    hover:file:bg-violet-100" />
+    </label>
+  </div>
+  <hr>
+</div>

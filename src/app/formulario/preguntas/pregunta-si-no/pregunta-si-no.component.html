@@ -1,1 +1,25 @@
-<p>pregunta-si-no works!</p>
+<div class="flex flex-col items-center space-y-4">
+  <label class="block text-sm font-medium text-gray-700">{{ label }}</label>
+
+  <div class="flex items-center space-x-6">
+    <!-- Opción Sí -->
+    <div class="flex items-center">
+      <input id="si-{{ name }}" type="radio" [name]="name"
+             class="w-4 h-4 text-green-500 border-gray-300 focus:ring-green-500"
+             [checked]="seleccion === true"
+             (change)="onSeleccionChange(true)">
+      <label for="si-{{ name }}" class="ml-2 block text-sm font-medium text-gray-700">Sí</label>
+    </div>
+
+    <!-- Opción No -->
+    <div class="flex items-center">
+      <input id="no-{{ name }}" type="radio" [name]="name"
+             class="w-4 h-4 text-green-500 border-gray-300 focus:ring-green-500"
+             [checked]="seleccion === false"
+             (change)="onSeleccionChange(false)">
+      <label for="no-{{ name }}" class="ml-2 block text-sm font-medium text-gray-700">No</label>
+    </div>
+  </div>
+  <br>
+  <hr>
+</div>

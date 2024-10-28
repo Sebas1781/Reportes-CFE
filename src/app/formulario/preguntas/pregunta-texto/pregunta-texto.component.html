@@ -1,1 +1,45 @@
-<p>pregunta-texto works!</p>
+<!-- TODO: HACER TODOS LAS VERIFICACIONES CORRESPONDIENTES -->
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="relative p-4 pointer-events-none">
+    <input type="text" id="floating_outlined"
+           class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-500 peer pointer-events-auto"
+           [(ngModel)]="respuesta"
+           (ngModelChange)="onRespuestaChange($event)"
+           [required]="required"
+           [minlength]="minlength"
+           (keypress)="verificarSoloNumeros($event)"
+           [attr.inputmode]="soloNumeros ? 'numeric' : 'text'"
+           [attr.pattern]="soloNumeros ? '[0-9]\.\-*' : null"
+           #campoTexto="ngModel"
+           placeholder=" ">
+          <span class="absolute inset-y-10 right-7  transform -translate-y-1/2 flex items-center pr-3 text-gray-500">{{ unit }}</span>
+    <label for="floating_outlined"
+      class="absolute text-sm bg-white left-6 text-gray-500 duration-300 transform -translate-y-7 scale-75 top-8 z-10 origin-[0] px-2 peer-focus:px-2 peer-focus:text-green-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-7 peer-placeholder-shown:top-1/2 peer-focus:top-3 peer-focus:scale-75 peer-focus:-translate-y-2 pointer-events-none transition-all">
+      {{ label }}
+    </label>
+
+    <!-- Espacio reservado para mensajes de error -->
+    <div class="mt-2 min-h-[24px] pointer-events-none">
+      <div *ngIf="campoTexto.invalid && campoTexto.touched">
+        <div *ngIf="campoTexto.errors?.['required']">
+          <p class="text-sm text-red-600 dark:text-red-500">
+            <span class="font-medium">Oops!</span> Este campo es obligatorio.
+          </p>
+        </div>
+        <div *ngIf="campoTexto.errors?.['minlength']">
+          <p class="text-sm text-red-600 dark:text-red-500">
+            <span class="font-medium">Oops!</span> Debe tener al menos {{ minlength }} caracteres.
+          </p>
+        </div>
+        <div *ngIf="campoTexto.errors?.['soloNumeros']">
+          <p class="text-sm text-red-600 dark:text-red-500">
+            <span class="font-medium">Oops!</span> Solo se permiten números.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+  </div>
+</div>

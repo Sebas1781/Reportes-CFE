@@ -1,1 +1,38 @@
-<p>pregunta-rango works!</p>
+<div class="flex flex-col items-start w-full px-4 sm:px-8 md:px-16 lg:px-24">
+  <label for="rangeSlider" class="mb-2 text-sm text-gray-700">Pregunta:</label>
+  <div class="flex items-center w-full">
+    <span class="mr-2 text-sm text-gray-700">{{ min }}</span>
+    <input id="rangeSlider" type="range" [min]="min" [max]="max" [(ngModel)]="value" (input)="onInputChange($event)" class="w-full h-2 bg-green-500 rounded-lg appearance-none cursor-pointer range-slider">
+    <span class="ml-2 text-sm text-gray-700">{{ max }}</span>
+  </div>
+  <div class="flex justify-center w-full">
+    <span id="rangeValue" class="mt-2 text-sm font-medium text-gray-700 align-middle">{{ value }}</span>
+  </div>
+</div>
+
+<style>
+  #rangeSlider::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #81C784; /* Lighter green color */
+    cursor: pointer;
+  }
+
+  #rangeSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #81C784; /* Lighter green color */
+    cursor: pointer;
+  }
+
+  #rangeSlider::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #81C784; /* Lighter green color */
+    cursor: pointer;
+  }
+</style>

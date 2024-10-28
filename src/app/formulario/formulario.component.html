@@ -1,1 +1,95 @@
-<p>formulario works!</p>
+<form (ngSubmit)="onSubmit()" #form="ngForm" style="padding-top: 20px;">
+
+  <app-pregunta-texto
+    [label]="'text input 1'"
+    [(respuesta)]="respuestas.nombre"
+    [required]="true"
+    [minlength]="3">
+  </app-pregunta-texto>
+
+  <app-pregunta-texto
+    [label]="'text input 2'"
+    [(respuesta)]="respuestas.apellido"
+    [required]="true"
+    [minlength]="8">
+  </app-pregunta-texto>
+
+  <app-pregunta-rango
+    [label]="'range slider'"
+    [(value)]="respuestas.rango"
+    [min]="0"
+    [max]="100">
+  </app-pregunta-rango>
+
+  <app-pregunta-texto
+    [label]="'text input 3 numeros'"
+    [(respuesta)]="respuestas.numero"
+    [required]="true"
+    [minlength]="3"
+    [soloNumeros]="true"
+    [unit]="'Ohms'">
+  </app-pregunta-texto>
+
+  <app-pregunta-fecha
+    [label]="'input fecha'"
+    [(fecha)]="respuestas.fechaEvento">
+  </app-pregunta-fecha>
+
+  <app-pregunta-hora
+  [label]="'input hora'"
+  [(hora)]="respuestas.horaEvento">
+</app-pregunta-hora>
+<br>
+<app-pregunta-seleccion
+    [label]="'pregunta seleccion'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4']"
+    [(seleccion)]="respuestas.opcionSeleccionada">
+  </app-pregunta-seleccion>
+
+  <br>
+  <div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+    <!-- Primera pregunta sí/no -->
+    <app-pregunta-si-no
+      [label]="'pregunta si/no'"
+      [(seleccion)]="respuestas.aceptacion"
+      [name]="'aceptacion'">
+    </app-pregunta-si-no>
+
+    <!-- Segunda pregunta sí/no -->
+    <app-pregunta-si-no
+      [label]="'pregunta si/no 2'"
+      ></app-pregunta-si-no>
+
+ <app-pregunta-si-no
+      [label]="'pregunta si/no 3'"
+      [(seleccion)]="respuestas.aceptacion2"
+      [name]="'aceptacion2'"
+      >
+
+    </app-pregunta-si-no>
+  </div>
+  <hr>
+  <br>
+
+  <app-pregunta-imagen
+  [label]="'Foto'"
+  (imagenSeleccionada)="onImagenSeleccionada($event)">
+</app-pregunta-imagen>
+
+<app-pregunta-texto-largo
+[label]="'Texto largo'"
+[(respuesta)]="respuestas.descripcion"
+[required]="true"
+[minlength]="10">
+</app-pregunta-texto-largo>
+
+<br>
+
+<app-mapa></app-mapa>
+
+<br>
+  <div class="flex justify-center">
+    <button type="submit" [disabled]="form.invalid" class="outline outline-gray-500 hover:outline-green-500 rounded-lg px-7 py-2 text-base">Enviar Formulario</button>
+  </div>
+
+</form>
