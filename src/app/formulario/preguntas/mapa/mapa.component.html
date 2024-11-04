@@ -9,6 +9,7 @@
       <div class="relative h-10 w-full min-w-[200px] mt-4">
         <input
           id="latitud"
+          [(ngModel)]="latitud"
           class="peer h-full w-full rounded-[7px] border border-green-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-green-200 placeholder-shown:border-t-green-200 focus:border-2 focus:border-green-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
           placeholder=""
           readonly
@@ -22,6 +23,7 @@
       <div class="relative h-10 w-full min-w-[200px] mt-4">
         <input
           id="longitud"
+          [(ngModel)]="longitud"
           class="peer h-full w-full rounded-[7px] border border-green-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-green-200 placeholder-shown:border-t-green-200 focus:border-2 focus:border-green-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
           placeholder=""
           readonly
@@ -33,13 +35,12 @@
       </div>
     </div>
     <br>
-    <div class="flex items-center p-2 bg-green-200 rounded-lg shadow-xs cursor-pointer hover:bg-green-500 hover:text-gray-100" (click)="obtenerUbicacion()" aria-label="Obtener mi ubicación actual">
-    <svg class="h-5 w-5 fill-current hover:text-gray-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+    <div class="flex items-center justify-center p-2 bg-green-200 rounded-lg shadow-xs cursor-pointer hover:bg-green-500 hover:text-gray-100" (click)="obtenerUbicacion()" aria-label="Obtener mi ubicación actual">
+      <svg class="h-5 w-6 fill-current hover:text-gray-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
         <path d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
-    </svg>
-    <div>
-        <p class="text-xs font-medium ml-2">
-            Obtener Ubicación Actual
+      </svg>
+        <p class=" items-center h-2  text-xs font-medium mt-2">
+          Obtener Ubicación Actual
         </p>
     </div>
 </div>

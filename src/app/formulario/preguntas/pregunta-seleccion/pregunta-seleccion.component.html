@@ -15,8 +15,8 @@
     </button>
 
     <!-- Dropdown visible solo al hacer clic en el ícono -->
-    <div *ngIf="showDropdown" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg pointer-events-auto" style="width: calc(100% - 2rem); left: 1rem;">
-      <ul class="py-1">
+    <div *ngIf="showDropdown" class="absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg pointer-events-auto" style="width: calc(100% - 2rem); left: 1rem;">
+      <ul class="py-1 max-h-40 overflow-y-auto">
         <li *ngFor="let opcion of opciones" class="cursor-pointer hover:bg-gray-200 px-4 py-2" (click)="seleccionarOpcion(opcion)">
           {{ opcion }}
         </li>
@@ -36,6 +36,6 @@
         </p>
       </div>
     </div>
+    <hr>
   </div>
-  <hr>
 </div>

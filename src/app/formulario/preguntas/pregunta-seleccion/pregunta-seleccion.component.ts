@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-pregunta-seleccion',
@@ -6,6 +6,8 @@ import { Component, Input, Output, EventEmitter, HostListener } from '@angular/c
   styleUrls: ['./pregunta-seleccion.component.css']
 })
 export class PreguntaSeleccionComponent {
+  constructor(private eRef: ElementRef) {}
+
   @Input() label: string = '';
   @Input() opciones: string[] = [];
   @Input() seleccion: string = '';
@@ -21,6 +23,13 @@ export class PreguntaSeleccionComponent {
     this.seleccion = opcion;
     this.seleccionChange.emit(this.seleccion);
     this.showDropdown = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: MouseEvent) {
+    if (this.showDropdown && !this.eRef.nativeElement.contains(event.target)) {
+      this.showDropdown = false;
+    }
   }
 
   onInputChange(event: any): void {

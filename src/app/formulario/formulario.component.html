@@ -1,93 +1,505 @@
-<form (ngSubmit)="onSubmit()" #form="ngForm" style="padding-top: 20px;">
+<form (ngSubmit)="onSubmit()" #form="ngForm" class="p-6 space-y-6">
+<p class="text-center text-2xl font-light">Generar nuevo reporte</p>
 
-  <app-pregunta-texto
-    [label]="'text input 1'"
-    [(respuesta)]="respuestas.nombre"
-    [required]="true"
-    [minlength]="3">
-  </app-pregunta-texto>
-
-  <app-pregunta-texto
-    [label]="'text input 2'"
-    [(respuesta)]="respuestas.apellido"
-    [required]="true"
-    [minlength]="8">
-  </app-pregunta-texto>
-
-  <app-pregunta-rango
-    [label]="'range slider'"
-    [(value)]="respuestas.rango"
-    [min]="0"
-    [max]="100">
-  </app-pregunta-rango>
-
-  <app-pregunta-texto
-    [label]="'text input 3 numeros'"
-    [(respuesta)]="respuestas.numero"
-    [required]="true"
-    [minlength]="3"
-    [soloNumeros]="true"
-    [unit]="'Ohms'">
-  </app-pregunta-texto>
-
-  <app-pregunta-fecha
-    [label]="'input fecha'"
-    [(fecha)]="respuestas.fechaEvento">
-  </app-pregunta-fecha>
-
-  <app-pregunta-hora
-  [label]="'input hora'"
-  [(hora)]="respuestas.horaEvento">
-</app-pregunta-hora>
-<br>
 <app-pregunta-seleccion
-    [label]="'pregunta seleccion'"
-    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4']"
-    [(seleccion)]="respuestas.opcionSeleccionada">
-  </app-pregunta-seleccion>
+    [label]="'Tipo de mantenimiento:'"
+    [opciones]="['Mantenimiento preventivo', 'Mantenimiento correctivo', 'Puesta en servicio']"
+    [(seleccion)]="respuestas.tipoMantto">
+</app-pregunta-seleccion>
 
-  <br>
-  <div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
-    <!-- Primera pregunta sí/no -->
-    <app-pregunta-si-no
-      [label]="'pregunta si/no'"
-      [(seleccion)]="respuestas.aceptacion"
-      [name]="'aceptacion'">
-    </app-pregunta-si-no>
 
-    <!-- Segunda pregunta sí/no -->
-    <app-pregunta-si-no
-      [label]="'pregunta si/no 2'"
-      ></app-pregunta-si-no>
+<app-pregunta-seleccion
+    [label]="'Modelo UTR:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.modelo">
+</app-pregunta-seleccion>
 
- <app-pregunta-si-no
-      [label]="'pregunta si/no 3'"
-      [(seleccion)]="respuestas.aceptacion2"
-      [name]="'aceptacion2'"
-      >
 
-    </app-pregunta-si-no>
-  </div>
-  <hr>
-  <br>
+<p class="text-center text-2xl font-light">Información basica</p>
 
-  <app-pregunta-imagen
-  [label]="'Foto'"
-  (imagenSeleccionada)="onImagenSeleccionada($event)">
-</app-pregunta-imagen>
+<app-pregunta-fecha
+[label]="'Fecha:'"
+[(fecha)]="respuestas.fecha">
+</app-pregunta-fecha>
+
+
+<app-pregunta-hora
+[label]="'Hora de inicio:'"
+[(hora)]="respuestas.horaInicio">
+</app-pregunta-hora>
+
+<app-pregunta-seleccion
+    [label]="'Responsable:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.responsable">
+</app-pregunta-seleccion>
+
+<app-pregunta-texto
+[label]="'Licencia:'"
+[(respuesta)]="respuestas.licencia"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Registro:'"
+[(respuesta)]="respuestas.registro"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Restaurador:'"
+[(respuesta)]="respuestas.restaurador"
+[required]="true">
+</app-pregunta-texto>
+
+<app-pregunta-seleccion
+    [label]="'Circuito:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.circuito">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Area:'"
+    [opciones]="['Pachuca', 'Actopan', 'Cubitos', 'Tizayuca']"
+    [(seleccion)]="respuestas.area">
+</app-pregunta-seleccion>
+
+<p class="text-center text-2xl font-light">Mapa</p>
+
+
+<app-mapa
+[latitud]="respuestas.latitud"
+[longitud]="respuestas.longitud"
+(coordenadasActualizadas)="onCoordenadasRecibidas($event)">
+</app-mapa>
+
+<app-pregunta-texto
+[label]="'Direccion:'"
+[(respuesta)]="respuestas.direccion"
+[required]="true">
+</app-pregunta-texto>
+
+<p class="text-center text-2xl font-light">Información basica del sistema de comunicaciones</p>
+
+
+<app-pregunta-texto
+[label]="'Radio / Gabinete:'"
+[(respuesta)]="respuestas.nsRadioGabinete"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Potencia de salida (W):'"
+[(respuesta)]="respuestas.potenciaSalida"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+
+<app-pregunta-rango
+[label]="'RSSI (dBm):'"
+[(value)]="respuestas.rssi"
+[min]="-120"
+[max]="0">
+</app-pregunta-rango>
+
+<app-pregunta-rango
+[label]="'Umbral de recepción:'"
+[(value)]="respuestas.umbralRecepcion"
+[min]="-120"
+[max]="0">
+</app-pregunta-rango>
+
+<app-pregunta-seleccion
+    [label]="'Frecuencia Mhz:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.frecuencia">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Rx:'"
+    [opciones]="['0001/10001', '0002/10002', '0003/10003', '0004/10004','0005/10005', '0006/0006', 'N/A']"
+    [(seleccion)]="respuestas.rx">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Tx:'"
+    [opciones]="['0001/10001', '0002/10002', '0003/10003', '0004/10004','0005/10005', '0006/0006', 'N/A']"
+    [(seleccion)]="respuestas.tx">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Cable pigtail:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.cablePigtail">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Supresor:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.supresor">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Cable de L.T. :'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.cableLT">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Antena:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.antena">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Altura antena (m):'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.alturaAntena">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Repetidor de Enlace:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.repetidorEnlace">
+</app-pregunta-seleccion>
+
+<app-pregunta-seleccion
+    [label]="'Canal UCM:'"
+    [opciones]="['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4','Opción 2', 'Opción 3']"
+    [(seleccion)]="respuestas.canalUCM">
+</app-pregunta-seleccion>
+
+<p class="text-center text-2xl font-light">Mantenimiento de sistema de comunicaciones</p>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Fotografias del mantenimiento:'"
+    [(seleccion)]="respuestas.fotografiaMantto"
+    [name]="'aceptacion'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Mediciones de RF '"
+    [(seleccion)]="respuestas.medicionRF"
+    [name]="'aceptacion2'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Mediciones de fuente de CD'"
+    [(seleccion)]="respuestas.medicionFuenteCD"
+    [name]="'aceptacion3'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Medicion de bateria:'"
+    [(seleccion)]="respuestas.medicionBateria"
+    [name]="'aceptacion4'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Limpieza de radio, conectores y supresor '"
+    [(seleccion)]="respuestas.limpieza"
+    [name]="'aceptacion5'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Ajuste de tornilleria'"
+    [(seleccion)]="respuestas.ajusteTornilleria"
+    [name]="'aceptacion6'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Cambio de antena:'"
+    [(seleccion)]="respuestas.cambioAntena"
+    [name]="'aceptacion7'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Impermebealizacion de conectores'"
+    [(seleccion)]="respuestas.impermeabilizacionConectores"
+    [name]="'aceptacion8'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Redireccionamiento de antena'"
+    [(seleccion)]="respuestas.redireccionamientoAntena"
+    [name]="'aceptacion9'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Cambio de L.T.:'"
+    [(seleccion)]="respuestas.cambioLT"
+    [name]="'aceptacion10'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Cambio de supresor: '"
+    [(seleccion)]="respuestas.cambioSupresor"
+    [name]="'aceptacion11'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Cambio de pigtail:'"
+    [(seleccion)]="respuestas.cambioPigtail"
+    [name]="'aceptacion12'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Cambio de radio:'"
+    [(seleccion)]="respuestas.cambioRadio"
+    [name]="'aceptacion13'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Cambio de conectores'"
+    [(seleccion)]="respuestas.cambioConectores"
+    [name]="'aceptacion14'"
+    ></app-pregunta-si-no>
+</div>
+
+<p class="text-center text-2xl font-light">Mediciones</p>
+
+<app-pregunta-texto
+[label]="'Potencia de radio W:'"
+[(respuesta)]="respuestas.potenciaRadio"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Potencia incidente W:'"
+[(respuesta)]="respuestas.potenciaIncidente"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Potencia reflejada W:'"
+[(respuesta)]="respuestas.potenciaReflejada"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'VSWR:'"
+[(respuesta)]="respuestas.vswr"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Voltaje acometida Vca:'"
+[(respuesta)]="respuestas.voltajeAcometida"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'resistencia de Tierra:'"
+[(respuesta)]="respuestas.resistenciaTierra"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Voltaje fuente Vcd:'"
+[(respuesta)]="respuestas.voltajeFuente"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Voltaje de bateria Vcd:'"
+[(respuesta)]="respuestas.voltajeBateria"
+[required]="true"
+[soloNumeros]="true">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Resistencia de bateria:'"
+[(respuesta)]="respuestas.resitenciaBateria"
+[required]="true"
+[soloNumeros]="true"
+[unit]="'Ohms'">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Porcentaje de vida de la bateria:'"
+[(respuesta)]="respuestas.porcentajeBateria"
+[required]="true"
+[soloNumeros]="true"
+[unit]="'%'">
+</app-pregunta-texto>
+
+<app-pregunta-texto
+[label]="'Angulo de Azimut:'"
+[(respuesta)]="respuestas.anguloAzimut"
+[required]="true"
+[soloNumeros]="true"
+[unit]="'°'">
+</app-pregunta-texto>
+
+<p class="text-center text-2xl font-light">Instalación de equipo</p>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Placa con nomenclatura:'"
+    [(seleccion)]="respuestas.placaNomeclatura"
+    [name]="'aceptacion15'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Sellado de gabinete: '"
+    [(seleccion)]="respuestas.selladoGabinete"
+    [name]="'aceptacion16'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Protector antifauna:'"
+    [(seleccion)]="respuestas.protectorAntifauna"
+    [name]="'aceptacion17'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Cuchillas de Bypass:'"
+    [(seleccion)]="respuestas.cuchillaByPass"
+    [name]="'aceptacion18'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Cuchillas laterales: '"
+    [(seleccion)]="respuestas.cuchillaLaterale"
+    [name]="'aceptacion19'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Bajante de tierra:'"
+    [(seleccion)]="respuestas.bajanteTierra"
+    [name]="'aceptacion20'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-20 mb-6">
+  <app-pregunta-si-no
+    [label]="'Terminales PAT:'"
+    [(seleccion)]="respuestas.terminalPAT"
+    [name]="'aceptacion21'">
+  </app-pregunta-si-no>
+
+  <app-pregunta-si-no
+    [label]="'Apartarrayos: '"
+    [(seleccion)]="respuestas.apartarrayos"
+    [name]="'aceptacion22'"
+    ></app-pregunta-si-no>
+
+<app-pregunta-si-no
+    [label]="'Cable RF sujetado:'"
+    [(seleccion)]="respuestas.cableRF"
+    [name]="'aceptacion23'"
+    >
+  </app-pregunta-si-no>
+</div>
+
+<app-pregunta-texto
+[label]="'Calibre bajante:'"
+[(respuesta)]="respuestas.calibreBajanate"
+[required]="true">
+</app-pregunta-texto>
 
 <app-pregunta-texto-largo
-[label]="'Texto largo'"
-[(respuesta)]="respuestas.descripcion"
-[required]="true"
-[minlength]="10">
+[label]="'Observaciones:'"
+[(respuesta)]="respuestas.Observaciones"
+[required]="true">
 </app-pregunta-texto-largo>
 
+<p class="text-center text-2xl font-light">Evidencias</p>
 <br>
+<app-pregunta-imagen
+    [label]="'Estructura completa:'"
+    [campo]="'imagenEstructura'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
 
-<app-mapa></app-mapa>
+  <app-pregunta-imagen
+    [label]="'Gabinete:'"
+    [campo]="'imagenGabinete'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
 
-<br>
+  <app-pregunta-imagen
+    [label]="'Radio'"
+    [campo]="'imagenRadio'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Supresor:'"
+    [campo]="'imagenSupresor'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Restaurador:'"
+    [campo]="'imagenRestaurador'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Terminal de tierra:'"
+    [campo]="'imagenTerminalTierra'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Bajante de tierra:'"
+    [campo]="'imagenBajanteTierra'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Placa'"
+    [campo]="'imagenPlaca'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-imagen
+    [label]="'Imagen Adicional:'"
+    [campo]="'imagenAdicional'"
+    (imagenSeleccionada)="onImagenSeleccionada($event)">
+  </app-pregunta-imagen>
+
+  <app-pregunta-texto-largo
+  [label]="'Codigo de Radio:'"
+  [(respuesta)]="respuestas.configuracionRadio"
+  [required]="true">
+  </app-pregunta-texto-largo>
+
+  <app-pregunta-hora
+  [label]="'Hora de termino:'"
+  [(hora)]="respuestas.horaTermnino">
+  </app-pregunta-hora>
+
+<br> <hr>
   <div class="flex justify-center">
     <button type="submit" [disabled]="form.invalid" class="outline outline-gray-500 hover:outline-green-500 rounded-lg px-7 py-2 text-base">Enviar Formulario</button>
   </div>
